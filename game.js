@@ -7,49 +7,47 @@ let getRandomInt = n => Math.floor(Math.random() * n);
 
 let getComputerChoice = () => playOptions[getRandomInt(playOptions.length)];
 
-function playRound(playerSelection, computerSelection) {
-  playerSelection = playerSelection.toLowerCase();
+let toCapital = (word) => word[0].toUpperCase() + word.slice(1);
 
+function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection)
     return `draw`
-
-  if (playerSelection === 'rock' && computerSelection === 'paper')
-    return 'pc'
   if (playerSelection === 'rock' && computerSelection === 'scissors')
     return 'player'
-
   if (playerSelection === 'paper' && computerSelection === 'rock')
     return 'player'
-  if (playerSelection === 'paper' && computerSelection === 'scissors')
-    return 'pc'
-
-  if (playerSelection === 'scissors' && computerSelection === 'rock')
-    return 'pc'
   if (playerSelection === 'scissors' && computerSelection === 'paper')
     return 'player'
+  return 'pc'
 }
 
 function game(rounds = 5) {
-  const score = {
-    'player': 0,
-    'pc': 0
-  }
+  let playerScore = 0;
+  let pcScore = 0;
   for (let i = 0; i < rounds; i++) {
-    let roundResult = playRound(prompt('Rock, Paper or Scissors: ', 'Rock'), getComputerChoice());
+    let playerChoice = prompt('Rock, Paper or Scissors: ', 'Rock').toLowerCase();
+    let pcChoice = getComputerChoice();
+
+    let roundResult = playRound(playerChoice, pcChoice);
+    
+    playerChoice = toCapital(playerChoice);
+    pcChoice = toCapital(pcChoice);
+
+    let message = `Round ${i + 1}: `;
     if (roundResult === 'draw') {
-      console.log(`Round ${i + 1} is a draw`);
+      message += `is a draw. Both choose ${playerChoice}`;
+    } else if (roundResult === 'player') {
+      message += `You Won! ${playerChoice} beats ${pcChoice}`;
+      playerScore++;
     } else {
-      console.log(`Round ${i + 1} winner is ${roundResult}`);
-      score[roundResult]++;
+      message += `You Lose! ${pcChoice} beats ${playerChoice}`;
+      pcScore++;
     }
+    console.log(message);
   }
   let gameResult =
-    score['player'] === score['pc'] ? "There's no winner, result is a draw!" :
-    score['player'] > score['pc'] ? "Winner is player" : "Winner is pc";
+  playerScore === pcScore ? "There's no winner, result is a draw!" :
+  playerScore > pcScore ? "Winner - player" : "Winner - pc";
   return gameResult
 }
 console.log(game());
-
-// rock > scissors
-// paper > rock
-// scissors > paper
