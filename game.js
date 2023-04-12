@@ -3,7 +3,7 @@
 const playOptions = ['rock', 'paper', 'scissors'];
 
 let getRandomInt = n => Math.floor(Math.random() * n);
-// n not included
+// -> 0 ... n - 1
 
 let getComputerChoice = () => playOptions[getRandomInt(playOptions.length)];
 
