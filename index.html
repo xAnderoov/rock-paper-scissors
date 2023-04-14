@@ -10,20 +10,25 @@
   <script src="game.js" defer></script>
 </head>
 
-<body>
+<body class="active">
   <main>
-    <div class="score hidden">
-      <span class="player">0</span>
-      <span class="pc" >0</span>
+    <p class="winner"></p>
+    <div class="score">
+      <label>
+        <span>Player:</span>
+        <input id="player" type="text" value="0" disabled>
+      </label>
+      <label>
+        <span>PC:</span>
+        <input id="pc" type="text" value="0" disabled>
+      </label>
     </div>
     <div class="choice">
-      <button data-key="rock" type="button">Rock</button>
-      <button data-key="paper" type="button">Paper</button>
-      <button data-key="scissors" type="button">Scissors</button>
+      <button data-key="Rock" type="button">Rock</button>
+      <button data-key="Paper" type="button">Paper</button>
+      <button data-key="Scissors" type="button">Scissors</button>
     </div>
-    <div class="result">
-      <p>dsf</p>
-    </div>
+    <div class="result"></div>
   </main>
   <footer>
     <a href="credits.html">Credits</a>
