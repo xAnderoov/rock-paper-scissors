@@ -78,6 +78,7 @@ button {
 }
 
 .result {
+  overflow: auto;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
